@@ -24,7 +24,8 @@ export default function EditText({
   showEditButton = false,
   editButtonContent = <EditIcon />,
   editButtonProps = {},
-  inputClassName
+  inputClassName,
+  editOnDoubleClick = false
 }) {
   const inputRef = React.useRef(null);
   const [changeEvent, setChangeEvent] = React.useState({});
@@ -50,6 +51,14 @@ export default function EditText({
 
   const handleClickDisplay = () => {
     if (readonly || showEditButton) return;
+    if (editOnDoubleClick) return;
+    setEditMode(true);
+    onEditMode();
+  };
+
+  const handleDoubleClickDisplay = () => {
+    if (readonly || showEditButton) return;
+    if (!editOnDoubleClick) return;
     setEditMode(true);
     onEditMode();
   };
@@ -120,6 +129,7 @@ export default function EditText({
             className
           )}
           onClick={handleClickDisplay}
+          onDoubleClick={handleDoubleClickDisplay}
           style={style}
           aria-label='display component'
         >
