@@ -16,6 +16,15 @@ test('clicking on the component should activate edit mode', async () => {
   expect(screen.queryByLabelText(displayComponentLabel)).toBeNull();
   expect(screen.queryByLabelText(inputComponentLabel)).toBeTruthy();
 });
+test('double clicking on the component should activate edit mode if editOnDoubleClick is true', async () => {
+  render(<EditText editOnDoubleClick />);
+  const div = await screen.findByLabelText(displayComponentLabel);
+  expect(div).toBeTruthy();
+  expect(screen.queryByLabelText(inputComponentLabel)).toBeNull();
+  await userEvent.dblClick(div);
+  expect(screen.queryByLabelText(displayComponentLabel)).toBeNull();
+  expect(screen.queryByLabelText(inputComponentLabel)).toBeTruthy();
+});
 test('pressing enter key should disable edit mode and trigger onSave', async () => {
   const handleSave = jest.fn();
   render(<EditText name='mockName' onSave={handleSave} />);

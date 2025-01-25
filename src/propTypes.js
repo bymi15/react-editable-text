@@ -23,7 +23,8 @@ export const EditTextPropTypes = {
   inline: PropTypes.bool,
   showEditButton: PropTypes.bool,
   editButtonContent: PropTypes.any,
-  editButtonProps: PropTypes.object
+  editButtonProps: PropTypes.object,
+  editOnDoubleClick: PropTypes.bool
 };
 
 export const EditTextareaPropTypes = {
